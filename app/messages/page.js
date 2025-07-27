@@ -15,7 +15,7 @@ export default function MessagesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-black p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">📜 All Messages</h1>
 
       <div className="max-w-2xl mx-auto space-y-4">
