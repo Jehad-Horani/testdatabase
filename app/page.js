@@ -4,41 +4,54 @@ import { supabase } from "../lib/supabase";
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
-  const [newMsg, setNewMsg] = useState("");
+  const [name, setName] = useState("");
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     fetchMessages();
   }, []);
 
   async function fetchMessages() {
-    const { data } = await supabase.from("messages").select("*");
+    const { data } = await supabase.from("messages").select("*").order("id", { ascending: false });
     setMessages(data || []);
   }
 
   async function addMessage() {
-    if (!newMsg) return;
-    await supabase.from("messages").insert([{ content: newMsg }]);
-    setNewMsg("");
+    if (!name || !msg) return;
+    await supabase.from("messages").insert([{ name, content: msg }]);
+    setName("");
+    setMsg("");
     fetchMessages();
   }
 
   return (
-    <div style={{ padding: 30 }}>
-      <h1>📩 Simple Messages</h1>
-      <a href="/messages" style={{ marginLeft: 10 }}>📜 View All Messages</a>
+    <div className="min-h-screen flex flex-col items-center bg-gray-100 p-6">
+      <h1 className="text-3xl font-bold mb-6">💬 Simple Guestbook</h1>
 
-      <input
-        value={newMsg}
-        onChange={(e) => setNewMsg(e.target.value)}
-        placeholder="Write message..."
-      />
-      <button onClick={addMessage}>Send</button>
+      <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
+        <input
+          className="border p-2 w-full mb-3 rounded"
+          placeholder="Your name..."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <textarea
+          className="border p-2 w-full mb-3 rounded"
+          placeholder="Your message..."
+          value={msg}
+          onChange={(e) => setMsg(e.target.value)}
+        />
+        <button
+          onClick={addMessage}
+          className="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700"
+        >
+          Send Message
+        </button>
+      </div>
 
-      <ul>
-        {messages.map((m) => (
-          <li key={m.id}>{m.content}</li>
-        ))}
-      </ul>
+      <a href="/messages" className="mt-4 text-blue-500 hover:underline">
+        📜 View All Messages
+      </a>
     </div>
   );
 }

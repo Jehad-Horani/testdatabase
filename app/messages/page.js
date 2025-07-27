@@ -15,14 +15,20 @@ export default function MessagesPage() {
   }
 
   return (
-    <div style={{ padding: 30 }}>
-      <h1>📜 All Messages</h1>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">📜 All Messages</h1>
 
-      <ul>
+      <div className="max-w-2xl mx-auto space-y-4">
         {messages.map((m) => (
-          <li key={m.id}>{m.content}</li>
+          <div key={m.id} className="bg-white p-4 rounded-xl shadow-md">
+            <p className="font-semibold text-lg">{m.name}</p>
+            <p className="text-gray-700">{m.content}</p>
+            <p className="text-sm text-gray-400 mt-1">
+              {new Date(m.created_at).toLocaleString()}
+            </p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
