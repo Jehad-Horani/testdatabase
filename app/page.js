@@ -25,6 +25,7 @@ export default function Home() {
   return (
     <div style={{ padding: 30 }}>
       <h1>📩 Simple Messages</h1>
+      <a href="/messages" style={{ marginLeft: 10 }}>📜 View All Messages</a>
 
       <input
         value={newMsg}

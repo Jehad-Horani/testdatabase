@@ -17,7 +17,6 @@ export default function MessagesPage() {
   return (
     <div style={{ padding: 30 }}>
       <h1>📜 All Messages</h1>
-      <a href="/messages" style={{ marginLeft: 10 }}>📜 View All Messages</a>
 
       <ul>
         {messages.map((m) => (
