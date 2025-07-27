@@ -20,7 +20,7 @@ export default function MessagesPage() {
 
       <div className="max-w-2xl mx-auto space-y-4">
         {messages.map((m) => (
-          <div key={m.id} className="bg-white p-4 rounded-xl shadow-md">
+          <div key={m.id} className="bg-black p-4 rounded-xl shadow-md">
             <p className="font-semibold text-lg">{m.name}</p>
             <p className="text-gray-700">{m.content}</p>
             <p className="text-sm text-gray-400 mt-1">
